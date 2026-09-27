@@ -13,7 +13,7 @@ export default function AdminUsersPage() {
     setIsLoading(true);
     try {
       const res = await api.admin.users.list();
-      setUsers(res.data);
+      setUsers(res.data || []);
     } catch (err) {
       toast.error('ইউজার লোড করতে সমস্যা হয়েছে');
     } finally {
