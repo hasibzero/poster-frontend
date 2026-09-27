@@ -84,6 +84,24 @@ export const api = {
       }).then(res => res.json());
     },
   },
+
+  // Admin
+  admin: {
+    analytics: {
+      get: () => request<{
+        totalUsers: number;
+        totalPosters: number;
+        totalTemplates: number;
+        successfulGenerations: number;
+        totalTokens: number;
+        avgLatencyMs: number;
+      }>('/admin/analytics'),
+    },
+    posters: {
+      list: (page = 1, limit = 20) => request<PaginatedResponse<Poster>>(`/admin/posters?page=${page}&limit=${limit}`),
+      delete: (id: string) => request<void>(`/admin/posters/${id}`, { method: 'DELETE' }),
+    }
+  },
 };
 
 export { OCCASION_LABELS, OCCASION_COLORS };

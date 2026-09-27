@@ -65,7 +65,12 @@ export default function DashboardPage() {
             </Link>
 
             <div className="flex items-center gap-4">
-              <Link href="/create" className="bg-bangla-red text-white text-sm font-medium px-4 py-2 rounded-full hover:bg-bangla-red/90 transition-all shadow-sm flex items-center gap-1.5">
+              {user?.role === 'admin' && (
+                <Link href="/admin/dashboard" className="hidden sm:flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors font-bangla">
+                  অ্যাডমিন প্যানেল
+                </Link>
+              )}
+              <Link href="/create" className="bg-bangla-red text-white text-sm font-medium px-4 py-2 rounded-full hover:bg-bangla-red/90 transition-all shadow-sm flex items-center gap-1.5 font-bangla">
                 <Plus className="w-4 h-4" />
                 নতুন পোস্টার
               </Link>
