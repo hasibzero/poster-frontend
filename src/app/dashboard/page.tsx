@@ -88,7 +88,7 @@ export default function DashboardPage() {
                   </Link>
                 )}
                 {user?.role === 'admin' && (
-                  <Link href="/admin/dashboard" className="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors font-bangla flex items-center gap-1.5">
+                  <Link href="/admin/dashboard" className="text-sm font-medium text-purple-700 bg-purple-50 hover:bg-purple-100 transition-colors font-bangla flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-purple-100 shadow-sm">
                     <ShieldAlert className="w-4 h-4" />
                     অ্যাডমিন প্যানেল
                   </Link>
