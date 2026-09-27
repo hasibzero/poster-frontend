@@ -106,6 +106,9 @@ export const api = {
     posters: {
       list: (page = 1, limit = 20) => request<PaginatedResponse<Poster>>(`/admin/posters?page=${page}&limit=${limit}`),
       delete: (id: string) => request<void>(`/admin/posters/${id}`, { method: 'DELETE' }),
+    },
+    users: {
+      list: () => request<User[]>('/admin/users'),
     }
   },
 };

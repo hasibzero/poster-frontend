@@ -88,6 +88,13 @@ export default function LoginPage() {
             <p className="mt-2 text-gray-500 text-sm">
               আপনার অ্যাকাউন্টে লগইন করতে নিচের তথ্যগুলো দিন
             </p>
+            <div className="mt-6 bg-blue-50/50 border border-blue-200/50 rounded-xl p-4">
+              <p className="text-sm text-blue-900 font-semibold font-bangla mb-2">ডেমো অ্যাডমিন অ্যাকাউন্ট:</p>
+              <div className="text-sm text-blue-800 font-mono space-y-1">
+                <p>Email: admin@example.com</p>
+                <p>Pass: admin123</p>
+              </div>
+            </div>
           </div>
 
           <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
