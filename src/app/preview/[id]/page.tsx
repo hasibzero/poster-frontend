@@ -203,15 +203,6 @@ export default function PreviewPage() {
                   alt="Generated Poster"
                   className="w-full h-auto max-h-[800px] object-contain mx-auto"
                 />
-                {poster.status === 'generating' && (
-                  <div className="absolute inset-0 bg-white/60 backdrop-blur-sm flex items-center justify-center">
-                    <div className="bg-white rounded-2xl p-8 text-center shadow-lg border border-gray-200/60 max-w-sm w-full mx-4">
-                      <Loader2 className="w-8 h-8 animate-spin text-[#C8102E] mx-auto mb-4" />
-                      <p className="text-base font-semibold text-gray-900 font-bangla">পোস্টার তৈরি হচ্ছে...</p>
-                      <p className="text-sm text-gray-500 mt-2 font-bangla">এই প্রক্রিয়া ১৫-৩০ সেকেন্ড নিতে পারে</p>
-                    </div>
-                  </div>
-                )}
               </div>
             ) : (
               <div className="aspect-[3/4] bg-[#FAFAF8] rounded-xl flex flex-col items-center justify-center p-8 border border-gray-100">

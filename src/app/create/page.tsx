@@ -49,7 +49,9 @@ const occasions: { key: OccasionType; icon: any; desc: string }[] = [
   { key: 'eid', icon: ImageIcon, desc: 'ঈদ/উৎসব' },
 ];
 
-export default function CreatePosterPage() {
+import { Suspense } from 'react';
+
+function CreatePosterContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { token, isLoading: authLoading } = useAuth();
@@ -451,5 +453,13 @@ export default function CreatePosterPage() {
 
       </main>
     </div>
+  );
+}
+
+export default function CreatePosterPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-[#FAFAF8]"><div className="w-8 h-8 border-4 border-[#C8102E] border-t-transparent rounded-full animate-spin"></div></div>}>
+      <CreatePosterContent />
+    </Suspense>
   );
 }
