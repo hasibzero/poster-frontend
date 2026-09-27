@@ -35,6 +35,8 @@ const formSchema = z.object({
     occasionType: z.string().min(1),
     headlineText: z.string().min(1, 'হেডলাইন দিন').max(200),
     subHeadline: z.string().max(300).optional(),
+    fontFamily: z.string().optional(),
+    layoutMode: z.enum(['1-up', '2-up', '3-up']).optional(),
   }),
   uploadedPhotoUrls: z.array(z.string().url()).max(3),
 });

@@ -77,7 +77,7 @@ export default function BulkUploadPage() {
         occasionType: occasion,
         csvData: csvContent,
       });
-      toast.success(res.data.message);
+      toast.success(res.data?.message || 'সফলভাবে তৈরি হয়েছে');
       setTimeout(() => router.push('/history'), 2000);
     } catch (err) {
       toast.error('বাল্ক জেনারেশন ব্যর্থ হয়েছে');
