@@ -151,6 +151,7 @@ export default function CreatePosterPage() {
         formData: data.formData,
         uploadedPhotoUrls: data.uploadedPhotoUrls,
       });
+      if (!res.data?.posterId) throw new Error('No poster ID returned');
       toast.success('সফলভাবে পোস্টার তৈরি হয়েছে!', { id: loadingToast });
       router.push(`/preview/${res.data.posterId}`);
     } catch (err) {
