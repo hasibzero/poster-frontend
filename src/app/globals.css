@@ -4,23 +4,21 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 60 20% 98%;
     --foreground: 222.2 84% 4.9%;
   }
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-}
 
-@layer base {
-  * {
-    @apply border-gray-200;
-  }
   body {
-    @apply bg-white text-gray-900 antialiased;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    @apply bg-[#FAFAF8] text-gray-900;
+    font-family: var(--font-inter), var(--font-bangla), 'Inter', 'Noto Sans Bengali', system-ui, -apple-system, sans-serif;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    text-rendering: optimizeLegibility;
   }
 }
 
@@ -28,79 +26,70 @@
   .text-balance {
     text-wrap: balance;
   }
+  .font-bangla {
+    font-family: var(--font-bangla), 'Noto Sans Bengali', sans-serif;
+  }
 }
 
 @layer components {
   .btn {
-    @apply inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none;
+    @apply inline-flex items-center justify-center rounded-xl px-5 py-2.5 text-sm font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none;
   }
   .btn-primary {
-    @apply btn bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500;
+    @apply btn bg-[#C8102E] text-white hover:bg-[#a50d26] focus:ring-[#C8102E]/20;
   }
   .btn-secondary {
-    @apply btn bg-secondary-600 text-white hover:bg-secondary-700 focus:ring-secondary-500;
+    @apply btn bg-[#006A4E] text-white hover:bg-[#00553f] focus:ring-[#006A4E]/20;
   }
   .btn-outline {
-    @apply btn border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 focus:ring-gray-500;
+    @apply btn border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-900 focus:ring-gray-200;
   }
   .btn-ghost {
-    @apply btn text-gray-700 hover:bg-gray-100 focus:ring-gray-500;
+    @apply btn text-gray-600 hover:bg-gray-100/80 hover:text-gray-900 focus:ring-gray-200;
   }
   .btn-danger {
-    @apply btn bg-red-600 text-white hover:bg-red-700 focus:ring-red-500;
+    @apply btn bg-red-500 text-white hover:bg-red-600 focus:ring-red-500/20;
   }
+
   .input {
-    @apply w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm placeholder:text-gray-400 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20;
+    @apply w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm placeholder:text-gray-400 focus:border-bangla-red focus:outline-none focus:ring-2 focus:ring-bangla-red/20 transition-colors duration-200;
   }
+
   .label {
-    @apply block text-sm font-medium text-gray-700 mb-1;
+    @apply block text-sm font-semibold text-gray-900 mb-1.5;
   }
+
   .card {
-    @apply bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden transition-shadow hover:shadow-md;
+    @apply bg-white rounded-2xl border border-gray-200/60 shadow-sm transition-shadow duration-200 hover:shadow-md;
   }
+
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-md border border-white/50 shadow-sm rounded-2xl;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-bangla-red to-orange-500;
+  }
+
   .badge {
-    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium;
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold;
   }
   .badge-primary {
-    @apply badge bg-primary-100 text-primary-800;
+    @apply badge bg-red-50 text-bangla-red;
   }
   .badge-secondary {
-    @apply badge bg-secondary-100 text-secondary-800;
+    @apply badge bg-emerald-50 text-bangla-green;
   }
   .badge-success {
-    @apply badge bg-green-100 text-green-800;
+    @apply badge bg-green-50 text-green-700;
   }
   .badge-warning {
-    @apply badge bg-yellow-100 text-yellow-800;
+    @apply badge bg-orange-50 text-orange-700;
   }
   .badge-danger {
-    @apply badge bg-red-100 text-red-800;
+    @apply badge bg-red-50 text-red-700;
   }
   .badge-gray {
-    @apply badge bg-gray-100 text-gray-800;
+    @apply badge bg-gray-100 text-gray-700;
   }
-}
-
-@font-face {
-  font-family: 'Noto Sans Bengali';
-  src: url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800;900&display=swap');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Kalpurush';
-  src: url('https://fonts.googleapis.com/css2?family=Kalpurush&display=swap');
-  font-display: swap;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: 'Inter', system-ui, sans-serif;
-}
-
-.font-bangla {
-  font-family: 'Noto Sans Bengali', 'Kalpurush', sans-serif;
 }

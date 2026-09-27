@@ -43,96 +43,141 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div className="text-center">
-          <Link href="/" className="inline-flex items-center gap-2 mb-8">
-            <svg className="w-10 h-10 text-bangla-red" viewBox="0 0 32 32" fill="none">
+    <div className="min-h-screen bg-[#FAFAF8] flex">
+      {/* Left Decorative Panel */}
+      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-bangla-red to-red-900 p-12 flex-col justify-between relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '32px 32px' }}></div>
+        
+        <div className="relative z-10">
+          <Link href="/" className="inline-flex items-center gap-3 mb-12">
+            <svg className="w-12 h-12 text-white" viewBox="0 0 32 32" fill="none">
               <rect width="32" height="32" rx="8" fill="currentColor"/>
-              <path d="M8 16L14 22L24 10" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M8 16L14 22L24 10" stroke="#C8102E" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-            <span className="text-2xl font-bold font-bangla text-gray-900">পোস্টার জেনারেটর</span>
+            <span className="text-3xl font-bold font-bangla text-white tracking-tight">পোস্টার জেনারেটর</span>
           </Link>
-          <h2 className="text-3xl font-bold text-gray-900 font-bangla">আপনার অ্যাকাউন্টে লগইন করুন</h2>
-          <p className="mt-2 text-gray-600">অ্যাকাউন্ট নেই? <Link href="/register" className="text-primary-600 hover:text-primary-500 font-medium">রেজিস্টার করুন</Link></p>
-        </div>
-
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
-          {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm" role="alert">
-              {error}
-            </div>
-          )}
-
-          <div>
-            <label htmlFor="email" className="label">ইমেইল</label>
-            <input
-              id="email"
-              type="email"
-              autoComplete="email"
-              {...register('email')}
-              className={cn('input mt-1', errors.email && 'border-red-500 focus:border-red-500 focus:ring-red-500/20')}
-              placeholder="আপনার ইমেইল"
-            />
-            {errors.email && (
-              <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
-            )}
-          </div>
-
-          <div>
-            <label htmlFor="password" className="label">পাসওয়ার্ড</label>
-            <div className="relative mt-1">
-              <input
-                id="password"
-                type={showPassword ? 'text' : 'password'}
-                autoComplete="current-password"
-                {...register('password')}
-                className={cn('input pr-10', errors.password && 'border-red-500 focus:border-red-500 focus:ring-red-500/20')}
-                placeholder="আপনার পাসওয়ার্ড"
-              />
-              <button
-                type="button"
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-              </button>
-            </div>
-            {errors.password && (
-              <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>
-            )}
-          </div>
-
-          <div className="flex items-center justify-between">
-            <label className="flex items-center">
-              <input type="checkbox" className="rounded border-gray-300 text-primary-600 focus:ring-primary-500" />
-              <span className="ml-2 text-sm text-gray-600">মনে রাখুন</span>
-            </label>
-            <Link href="/forgot-password" className="text-sm text-primary-600 hover:text-primary-500">
-              পাসওয়ার্ড ভুলে গেছেন?
-            </Link>
-          </div>
-
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="btn-primary w-full py-3"
-          >
-            {isLoading ? (
-              <span className="flex items-center justify-center gap-2">
-                <Loader2 className="w-5 h-5 animate-spin" />
-                লগইন হচ্ছে...
-              </span>
-            ) : (
-              'লগইন করুন'
-            )}
-          </button>
-        </form>
-
-        <div className="text-center">
-          <p className="text-sm text-gray-600">
-            ডেমো için: demo@example.com / password123
+          
+          <h1 className="text-5xl font-bold font-bangla text-white leading-tight mb-6">
+            রাজনৈতিক প্রচারণার <br /> নতুন মাত্রা
+          </h1>
+          <p className="text-red-100 text-lg max-w-md font-bangla">
+            আধুনিক, দৃষ্টিনন্দন এবং প্রফেশনাল রাজনৈতিক পোস্টার তৈরি করুন কয়েক ক্লিকেই।
           </p>
+        </div>
+        
+        <div className="relative z-10 text-red-200/80 text-sm">
+          © {new Date().getFullYear()} পোস্টার জেনারেটর. সর্বস্বত্ব সংরক্ষিত.
+        </div>
+      </div>
+
+      {/* Right Form Area */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 sm:p-12 lg:p-16">
+        <div className="w-full max-w-md space-y-8">
+          <div className="text-center lg:text-left">
+            <div className="lg:hidden flex justify-center mb-8">
+              <Link href="/" className="inline-flex items-center gap-2">
+                <svg className="w-10 h-10 text-bangla-red" viewBox="0 0 32 32" fill="none">
+                  <rect width="32" height="32" rx="8" fill="currentColor"/>
+                  <path d="M8 16L14 22L24 10" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                <span className="text-2xl font-bold font-bangla text-gray-900">পোস্টার জেনারেটর</span>
+              </Link>
+            </div>
+            
+            <h2 className="text-3xl font-bold text-gray-900 font-bangla tracking-tight">স্বাগতম ফিরে এসেছেন</h2>
+            <p className="mt-2 text-gray-500 text-sm">
+              আপনার অ্যাকাউন্টে লগইন করতে নিচের তথ্যগুলো দিন
+            </p>
+          </div>
+
+          <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
+            {error && (
+              <div className="bg-red-50/50 border border-red-200/50 text-red-700 px-4 py-3 rounded-xl text-sm" role="alert">
+                {error}
+              </div>
+            )}
+
+            <div className="space-y-4">
+              <div>
+                <label htmlFor="email" className="label">ইমেইল</label>
+                <input
+                  id="email"
+                  type="email"
+                  autoComplete="email"
+                  {...register('email')}
+                  className={cn('input', errors.email && 'border-red-500 focus:border-red-500 focus:ring-red-500/20')}
+                  placeholder="name@example.com"
+                />
+                {errors.email && (
+                  <p className="mt-1.5 text-xs text-red-600">{errors.email.message}</p>
+                )}
+              </div>
+
+              <div>
+                <label htmlFor="password" className="label">পাসওয়ার্ড</label>
+                <div className="relative">
+                  <input
+                    id="password"
+                    type={showPassword ? 'text' : 'password'}
+                    autoComplete="current-password"
+                    {...register('password')}
+                    className={cn('input pr-10', errors.password && 'border-red-500 focus:border-red-500 focus:ring-red-500/20')}
+                    placeholder="••••••••"
+                  />
+                  <button
+                    type="button"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
+                {errors.password && (
+                  <p className="mt-1.5 text-xs text-red-600">{errors.password.message}</p>
+                )}
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between">
+              <label className="flex items-center group cursor-pointer">
+                <input type="checkbox" className="rounded border-gray-300 text-bangla-red focus:ring-bangla-red/20 w-4 h-4 transition-colors" />
+                <span className="ml-2 text-sm text-gray-600 group-hover:text-gray-900 transition-colors">মনে রাখুন</span>
+              </label>
+              <Link href="/forgot-password" className="text-sm font-medium text-bangla-red hover:text-[#a50d26] transition-colors">
+                পাসওয়ার্ড ভুলে গেছেন?
+              </Link>
+            </div>
+
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="btn-primary w-full py-3 text-base"
+            >
+              {isLoading ? (
+                <span className="flex items-center justify-center gap-2">
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  লগইন হচ্ছে...
+                </span>
+              ) : (
+                'লগইন করুন'
+              )}
+            </button>
+            
+            <p className="text-center text-sm text-gray-500 mt-6">
+              অ্যাকাউন্ট নেই?{' '}
+              <Link href="/register" className="font-semibold text-gray-900 hover:text-bangla-red transition-colors">
+                রেজিস্টার করুন
+              </Link>
+            </p>
+          </form>
+
+          <div className="mt-8 pt-6 border-t border-gray-100">
+            <div className="card p-4 bg-gray-50/50 border-none">
+              <p className="text-xs text-center text-gray-500 font-medium">
+                ডেমোর জন্য: demo@example.com / password123
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

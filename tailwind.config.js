@@ -39,8 +39,8 @@ module.exports = {
         },
       },
       fontFamily: {
-        bangla: ['Noto Sans Bengali', 'Kalpurush', 'sans-serif'],
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-inter)', 'var(--font-bangla)', 'Inter', 'Noto Sans Bengali', 'system-ui', '-apple-system', 'sans-serif'],
+        bangla: ['var(--font-bangla)', 'Noto Sans Bengali', 'sans-serif'],
       },
     },
   },

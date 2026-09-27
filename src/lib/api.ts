@@ -1,4 +1,4 @@
-import { Template, Poster, PosterFormData, ApiResponse, PaginatedResponse, OCCASION_LABELS, OCCASION_COLORS, OccasionType } from 'shared/types';
+import { User, Template, Poster, PosterFormData, ApiResponse, PaginatedResponse, OCCASION_LABELS, OCCASION_COLORS, OccasionType } from 'shared/types';
 
 const API_BASE = '/api/backend';
 
@@ -86,5 +86,25 @@ export const api = {
   },
 };
 
-export { OCCASION_LABELS, OCCASION_COLORS, OccasionType };
-export type { Template, Poster, PosterFormData, PaginatedResponse };
+export { OCCASION_LABELS, OCCASION_COLORS };
+export type { OccasionType, User, Template, Poster, PosterFormData, PaginatedResponse };
+
+export function getStatusLabel(status: Poster['status']): string {
+  const labels: Record<Poster['status'], string> = {
+    draft: 'খসড়া',
+    generating: 'তৈরি হচ্ছে',
+    completed: 'সম্পন্ন',
+    failed: 'ব্যর্থ',
+  };
+  return labels[status] || status;
+}
+
+export function getStatusColor(status: Poster['status']): string {
+  const colors: Record<Poster['status'], string> = {
+    draft: 'badge-gray',
+    generating: 'badge-warning',
+    completed: 'badge-success',
+    failed: 'badge-danger',
+  };
+  return colors[status] || 'badge-gray';
+}
