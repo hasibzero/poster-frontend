@@ -40,13 +40,14 @@ export default function HistoryPage() {
     setError('');
     try {
       const res = await api.posters.list(page, pagination.limit);
-      if (!res.data) throw new Error('No data returned');
-      setPosters(res.data.items);
+      const data = res.data;
+      if (!data) throw new Error('No data returned');
+      setPosters(data.items);
       setPagination(prev => ({
         ...prev,
-        page: res.data.page,
-        total: res.data.total,
-        totalPages: res.data.totalPages,
+        page: data.page,
+        total: data.total,
+        totalPages: data.totalPages,
       }));
     } catch (err) {
       setError(err instanceof Error ? err.message : 'পোস্টার লোড ব্যর্থ হয়েছে');
