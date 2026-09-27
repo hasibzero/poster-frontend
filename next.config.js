@@ -11,10 +11,12 @@ const nextConfig = {
     ],
   },
   async rewrites() {
+    const isProd = process.env.NODE_ENV === 'production';
+    const backendUrl = process.env.NEXT_PUBLIC_API_URL || (isProd ? 'https://poster-backend-phi.vercel.app' : 'http://localhost:5000');
     return [
       {
         source: '/api/backend/:path*',
-        destination: `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/:path*`,
+        destination: `${backendUrl}/api/:path*`,
       },
     ];
   },
