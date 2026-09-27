@@ -366,11 +366,40 @@ function CreatePosterContent() {
                 </div>
               </div>
 
-              {/* Section 3: Photos */}
+              {/* Section 3: Design Customization */}
               <div className="bg-white border border-gray-200/60 rounded-2xl shadow-sm p-8 transition-shadow hover:shadow-md">
                 <div className="flex items-center gap-4 mb-8">
                   <div className="w-10 h-10 rounded-full bg-[#FAFAF8] border border-gray-200 text-gray-900 flex items-center justify-center font-semibold text-sm">৩</div>
-                  <h3 className="text-lg font-semibold text-gray-900 font-bangla">ছবি আপলোড (সর্বোচ্চ ৩টি)</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 font-bangla">ডিজাইন কাস্টমাইজেশন</h3>
+                </div>
+                <div className="grid sm:grid-cols-2 gap-6">
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="fontFamily" className="text-sm font-medium text-gray-700 font-bangla">ফন্ট স্টাইল</label>
+                    <select id="fontFamily" {...register('formData.fontFamily')} className="w-full border border-gray-200/60 rounded-xl px-4 py-3 bg-gray-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#C8102E]/20 focus:border-[#C8102E] transition-all text-gray-900">
+                      <option value="Hind Siliguri">Hind Siliguri (Modern)</option>
+                      <option value="Noto Sans Bengali">Noto Sans (Clean)</option>
+                      <option value="Kalpurush">Kalpurush (Classic)</option>
+                    </select>
+                  </div>
+                  
+                  {selectedTemplate && selectedTemplate.layoutConfig.photoSlots.length > 1 && (
+                    <div className="flex flex-col gap-2">
+                      <label htmlFor="layoutMode" className="text-sm font-medium text-gray-700 font-bangla">লেআউট (ছবির সংখ্যা)</label>
+                      <select id="layoutMode" {...register('formData.layoutMode')} className="w-full border border-gray-200/60 rounded-xl px-4 py-3 bg-gray-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#C8102E]/20 focus:border-[#C8102E] transition-all text-gray-900">
+                        {Array.from({ length: selectedTemplate.layoutConfig.photoSlots.length }).map((_, i) => (
+                          <option key={i} value={`${i + 1}-up`}>{i + 1} টি ছবি</option>
+                        ))}
+                      </select>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Section 4: Photos */}
+              <div className="bg-white border border-gray-200/60 rounded-2xl shadow-sm p-8 transition-shadow hover:shadow-md">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="w-10 h-10 rounded-full bg-[#FAFAF8] border border-gray-200 text-gray-900 flex items-center justify-center font-semibold text-sm">৪</div>
+                  <h3 className="text-lg font-semibold text-gray-900 font-bangla">ছবি আপলোড</h3>
                 </div>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {uploadedPhotoUrls.map((url, index) => (
@@ -386,7 +415,7 @@ function CreatePosterContent() {
                       </div>
                     </div>
                   ))}
-                  {uploadedPhotoUrls.length < (selectedTemplate?.layoutConfig.photoSlots.length || 1) && (
+                  {uploadedPhotoUrls.length < parseInt((watch('formData.layoutMode') || `${selectedTemplate?.layoutConfig.photoSlots.length}-up`).charAt(0)) && (
                     <label className="relative aspect-[3/4] bg-[#FAFAF8] rounded-xl border-2 border-dashed border-gray-300 cursor-pointer hover:border-[#C8102E]/50 hover:bg-white transition-all group">
                       <input
                         type="file" accept="image/*" className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
