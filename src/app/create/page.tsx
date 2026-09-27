@@ -437,21 +437,23 @@ function CreatePosterContent() {
 
               {/* Sticky Submit Bar */}
               <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/80 backdrop-blur-md border-t border-gray-200/60 p-4 lg:p-6 lg:left-auto lg:right-auto lg:w-full lg:max-w-4xl lg:relative lg:bg-transparent lg:border-none lg:p-0 lg:backdrop-blur-none">
-                <div className="flex gap-4 max-w-screen-2xl mx-auto">
-                  <button type="button" onClick={() => setStep('template')} className="px-6 py-3.5 rounded-xl border border-gray-200 text-gray-700 font-medium hover:bg-gray-50 transition-colors flex items-center gap-2 bg-white shadow-sm font-bangla">
+                <div className="flex gap-2 sm:gap-4 max-w-screen-2xl mx-auto">
+                  <button type="button" onClick={() => setStep('template')} className="px-4 sm:px-6 py-3.5 rounded-xl border border-gray-200 text-gray-700 font-medium hover:bg-gray-50 transition-colors flex items-center justify-center gap-2 bg-white shadow-sm font-bangla shrink-0">
                     <ArrowLeft className="w-4 h-4" />
-                    ফিরে যান
+                    <span className="hidden sm:inline">ফিরে যান</span>
                   </button>
-                  <button type="submit" disabled={isLoading} className="flex-1 bg-[#C8102E] hover:bg-[#a00d24] text-white rounded-xl px-6 py-3.5 font-medium transition-colors shadow-sm flex items-center justify-center gap-2 text-base font-bangla disabled:opacity-70">
+                  <button type="submit" disabled={isLoading} className="flex-1 bg-[#C8102E] hover:bg-[#a00d24] text-white rounded-xl px-4 sm:px-6 py-3.5 font-medium transition-colors shadow-sm flex items-center justify-center gap-1.5 sm:gap-2 text-sm sm:text-base font-bangla disabled:opacity-70">
                     {isLoading ? (
                       <>
-                        <Loader2 className="w-5 h-5 animate-spin" />
-                        পোস্টার জেনারেট হচ্ছে...
+                        <Loader2 className="w-4 h-4 sm:w-5 sm:h-5 animate-spin" />
+                        <span className="hidden sm:inline">পোস্টার জেনারেট হচ্ছে...</span>
+                        <span className="sm:hidden">অপেক্ষা করুন...</span>
                       </>
                     ) : (
                       <>
-                        <Check className="w-5 h-5" />
-                        চূড়ান্ত পোস্টার তৈরি করুন
+                        <Check className="w-4 h-4 sm:w-5 sm:h-5" />
+                        <span className="hidden sm:inline">চূড়ান্ত পোস্টার তৈরি করুন</span>
+                        <span className="sm:hidden">তৈরি করুন</span>
                       </>
                     )}
                   </button>

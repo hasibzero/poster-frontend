@@ -2,14 +2,14 @@
 
 import { useAuth } from '@/lib/auth-context';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { LayoutDashboard, Users, Image as ImageIcon, ShieldAlert, LogOut } from 'lucide-react';
-import { Loader2 } from 'lucide-react';
+import { LayoutDashboard, Users, Image as ImageIcon, ShieldAlert, LogOut, Loader2, Menu, X } from 'lucide-react';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const { user, token, isLoading, logout } = useAuth();
   const router = useRouter();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     if (!isLoading) {
@@ -37,10 +37,29 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   ];
 
   return (
-    <div className="min-h-screen bg-[#FAFAF8] flex">
+    <div className="min-h-screen bg-[#FAFAF8] flex flex-col md:flex-row">
+      {/* Mobile Header */}
+      <div className="md:hidden flex items-center justify-between bg-white h-16 px-4 border-b border-gray-200/60 sticky top-0 z-40">
+        <Link href="/admin/dashboard" className="font-bangla font-bold text-lg tracking-tight text-gray-900 flex items-center gap-2">
+          <ShieldAlert className="w-5 h-5 text-[#C8102E]" />
+          অ্যাডমিন প্যানেল
+        </Link>
+        <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="p-2 text-gray-500 hover:text-gray-900">
+          {isSidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        </button>
+      </div>
+
+      {/* Overlay for mobile sidebar */}
+      {isSidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black/20 z-40 md:hidden"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className="w-64 bg-white border-r border-gray-200/60 flex-shrink-0 flex flex-col">
-        <div className="h-16 flex items-center px-6 border-b border-gray-200/60">
+      <aside className={`fixed md:sticky top-0 left-0 z-50 h-screen w-64 bg-white border-r border-gray-200/60 flex-shrink-0 flex flex-col transform transition-transform duration-300 ease-in-out md:translate-x-0 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+        <div className="h-16 flex items-center px-6 border-b border-gray-200/60 hidden md:flex">
           <Link href="/admin/dashboard" className="font-bangla font-bold text-lg tracking-tight text-gray-900 flex items-center gap-2">
             <ShieldAlert className="w-5 h-5 text-[#C8102E]" />
             অ্যাডমিন প্যানেল
@@ -82,8 +101,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-y-auto">
-        <div className="max-w-6xl mx-auto p-8">
+      <main className="flex-1 w-full max-w-full overflow-x-hidden md:overflow-y-auto min-h-screen">
+        <div className="max-w-6xl mx-auto p-4 sm:p-8">
           {children}
         </div>
       </main>

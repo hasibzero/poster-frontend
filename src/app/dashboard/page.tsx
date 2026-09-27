@@ -4,7 +4,7 @@ import { useAuth } from '@/lib/auth-context';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Layout, Image, Sparkles, Users, Shield, Star, LogOut, Plus, History, Download, Settings, Loader2, ArrowRight, Eye, ShieldAlert } from 'lucide-react';
+import { Layout, Image, Sparkles, Users, Shield, Star, LogOut, Plus, History, Download, Settings, Loader2, ArrowRight, Eye, ShieldAlert, Menu, X } from 'lucide-react';
 import { api, Poster, getStatusLabel, getStatusColor, OCCASION_LABELS, OCCASION_COLORS } from '@/lib/api';
 import { formatDate, getInitials } from '@/lib/utils';
 import toast from 'react-hot-toast';
@@ -22,6 +22,7 @@ export default function DashboardPage() {
   const router = useRouter();
   const [recentPosters, setRecentPosters] = useState<Poster[]>([]);
   const [loadingPosters, setLoadingPosters] = useState(true);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     if (!isLoading && !user) {
@@ -96,13 +97,20 @@ export default function DashboardPage() {
               </nav>
             </div>
 
-            <div className="flex items-center gap-4">
-              <Link href="/create" className="bg-bangla-red text-white text-sm font-medium px-4 py-2 rounded-full hover:bg-bangla-red/90 transition-all shadow-sm flex items-center gap-1.5 font-bangla">
+            <div className="flex items-center gap-2 sm:gap-4">
+              <Link href="/create" className="bg-bangla-red text-white text-sm font-medium px-3 sm:px-4 py-2 rounded-full hover:bg-bangla-red/90 transition-all shadow-sm flex items-center gap-1.5 font-bangla">
                 <Plus className="w-4 h-4" />
-                নতুন পোস্টার
+                <span className="hidden sm:inline">নতুন পোস্টার</span>
+                <span className="sm:hidden">নতুন</span>
               </Link>
               
-              <div className="flex items-center gap-4 pl-4 border-l border-gray-200/60">
+              <div className="flex items-center gap-2 sm:gap-4 pl-2 sm:pl-4 border-l border-gray-200/60">
+                <button 
+                  className="md:hidden p-2 text-gray-500 hover:text-gray-900 transition-colors"
+                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                >
+                  {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                </button>
                 <div className="flex items-center gap-2.5">
                   <div className="w-8 h-8 rounded-full bg-gray-100 border border-gray-200 flex items-center justify-center shadow-sm">
                     <span className="text-xs font-bold text-gray-700">
@@ -121,6 +129,28 @@ export default function DashboardPage() {
             </div>
           </div>
         </div>
+
+        {/* Mobile Navigation Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden border-t border-gray-200/60 bg-white">
+            <nav className="flex flex-col px-4 py-4 space-y-2">
+              <Link href="/dashboard" className="text-sm font-medium text-gray-900 font-bangla px-3 py-2 rounded-lg hover:bg-gray-50">ড্যাশবোর্ড</Link>
+              <Link href="/history" className="text-sm font-medium text-gray-700 hover:text-gray-900 font-bangla px-3 py-2 rounded-lg hover:bg-gray-50">হিস্ট্রি</Link>
+              {user?.isPremium && (
+                <Link href="/bulk" className="text-sm font-medium text-gray-700 hover:text-gray-900 font-bangla flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-50">
+                  বাল্ক জেনারেশন
+                  <span className="bg-red-100 text-bangla-red text-[10px] font-bold px-1.5 py-0.5 rounded uppercase">Pro</span>
+                </Link>
+              )}
+              {user?.role === 'admin' && (
+                <Link href="/admin/dashboard" className="text-sm font-medium text-purple-700 bg-purple-50 hover:bg-purple-100 font-bangla flex items-center gap-2 px-3 py-2 rounded-lg">
+                  <ShieldAlert className="w-4 h-4" />
+                  অ্যাডমিন প্যানেল
+                </Link>
+              )}
+            </nav>
+          </div>
+        )}
       </header>
 
       {/* Main Content */}
