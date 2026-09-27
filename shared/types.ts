@@ -5,6 +5,7 @@ export interface User {
   role: 'user' | 'admin';
   createdAt: Date;
   generationCount?: number;
+  isPremium?: boolean;
 }
 
 export interface TemplateLayoutConfig {

@@ -40,6 +40,18 @@ export default function DashboardPage() {
         toast.error('Failed to load recent posters');
         setLoadingPosters(false);
       });
+
+      // Handle payment callback
+      const urlParams = new URLSearchParams(window.location.search);
+      const paymentStatus = urlParams.get('payment');
+      if (paymentStatus === 'success') {
+        toast.success('পেমেন্ট সফল হয়েছে! আপনি এখন প্রো ইউজার।', { duration: 5000 });
+        window.history.replaceState({}, document.title, window.location.pathname);
+        setTimeout(() => window.location.reload(), 1500);
+      } else if (paymentStatus === 'failed') {
+        toast.error('পেমেন্ট ব্যর্থ হয়েছে। দয়া করে আবার চেষ্টা করুন।');
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
     }
   }, [user, token]);
 
