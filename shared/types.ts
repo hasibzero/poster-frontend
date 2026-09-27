@@ -4,6 +4,7 @@ export interface User {
   email: string;
   role: 'user' | 'admin';
   createdAt: Date;
+  generationCount?: number;
 }
 
 export interface TemplateLayoutConfig {
