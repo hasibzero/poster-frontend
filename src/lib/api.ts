@@ -64,6 +64,12 @@ export const api = {
       fetch(`${API_BASE}/posters/${id}/download?format=${format}`, {
         headers: { Authorization: `Bearer ${document.cookie.split('; ').find(r => r.startsWith('token='))?.split('=')[1]}` },
       }).then(res => res.blob()),
+    bulkCreate: (data: { templateId: string; occasionType: string; csvData: any[] }) =>
+      request<{ message: string; jobId: string }>('/posters/bulk', {
+        method: 'POST',
+        body: JSON.stringify(data),
+      }),
+    getBulkStatus: () => request<{ status: string }>('/posters/bulk/status'),
   },
 
   // Upload

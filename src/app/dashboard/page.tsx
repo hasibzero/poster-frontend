@@ -82,6 +82,11 @@ export default function DashboardPage() {
                   অ্যাডমিন প্যানেল
                 </Link>
               )}
+              {user?.isPremium && (
+                <Link href="/bulk" className="hidden sm:flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-bangla-red bg-red-50 hover:bg-red-100 rounded-full transition-colors font-bangla border border-red-100 shadow-sm">
+                  বাল্ক জেনারেশন (CSV)
+                </Link>
+              )}
               <Link href="/create" className="bg-bangla-red text-white text-sm font-medium px-4 py-2 rounded-full hover:bg-bangla-red/90 transition-all shadow-sm flex items-center gap-1.5 font-bangla">
                 <Plus className="w-4 h-4" />
                 নতুন পোস্টার
