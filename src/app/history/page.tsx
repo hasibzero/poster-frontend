@@ -40,6 +40,7 @@ export default function HistoryPage() {
     setError('');
     try {
       const res = await api.posters.list(page, pagination.limit);
+      if (!res.data) throw new Error('No data returned');
       setPosters(res.data.items);
       setPagination(prev => ({
         ...prev,

@@ -32,7 +32,9 @@ export default function DashboardPage() {
   useEffect(() => {
     if (user && token) {
       api.posters.list(1, 4).then(res => {
-        setRecentPosters(res.data.items);
+        if (res.data) {
+          setRecentPosters(res.data.items);
+        }
         setLoadingPosters(false);
       }).catch(err => {
         toast.error('Failed to load recent posters');

@@ -33,6 +33,7 @@ export default function PreviewPage() {
   const fetchPoster = async () => {
     try {
       const res = await api.posters.get(posterId);
+      if (!res.data) throw new Error('Poster not found');
       setPoster(res.data);
       return res.data;
     } catch (err) {
@@ -45,6 +46,7 @@ export default function PreviewPage() {
     setIsPolling(true);
     try {
       const res = await api.posters.get(posterId);
+      if (!res.data) throw new Error('Poster not found');
       const updatedPoster = res.data;
       setPoster(updatedPoster);
       
@@ -79,6 +81,7 @@ export default function PreviewPage() {
     setError('');
     try {
       const res = await api.posters.regenerate(posterId);
+      if (!res.data) throw new Error('Failed to regenerate');
       setPoster({ ...poster, status: 'generating', retryCount: res.data.retryCount });
       pollPoster();
     } catch (err) {
